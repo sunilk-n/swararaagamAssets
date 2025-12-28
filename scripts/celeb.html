@@ -155,6 +155,38 @@
           </h1>
         </div>
       </div>
+      <div class="d-flex flex-column m-auto px-5 d-none" id="post-celeb">
+        <div class="d-flex flex-column display-5" id="user-gift">
+          <div class="text-center">
+            <span
+              id="user-text"
+              class="d-block display-1 animate__animated animate__pulse animate__infinite wordwrap d-none"
+              >User</span
+            >
+            <span id="sentText" class="text-light"
+              >Share the wishes to your family and friends</span
+            >
+          </div>
+        </div>
+        <div
+          class="animate__animated animate__bounce animate__infinite text-center"
+        >
+          <img
+            src="https://raw.githubusercontent.com/sunilk-n/swararaagamAssets/refs/heads/main/images/happy_new_year.png"
+            alt="Happy New Year"
+            class="img-fluid w-75"
+          />
+        </div>
+        <div
+          class="animate__animated animate__tada animate__infinite text-center"
+        >
+          <img
+            src="https://raw.githubusercontent.com/sunilk-n/swararaagamAssets/refs/heads/main/images/2026.png"
+            alt="2026"
+            class="img-fluid w-100"
+          />
+        </div>
+      </div>
       <!-- <div class="display-5 text-center text-white mb-auto">
         <p class="explain" id="timer-text">Timer until New Year</p>
         <div class="d-flex flex-column" id="user-gift">
@@ -230,14 +262,71 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.3/tsparticles.confetti.bundle.min.js"></script>
     <script>
+      // Set the language based on selection
+      function change_language(lang) {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (lang == "tel") {
+          explain_text = "కొత్త సంవత్సరానికి గడువు";
+          share_btn_text = "వాట్సాప్‌లో షేర్ చేయండి";
+          share_text = "మీ కుటుంబ సభ్యులు మరియు మిత్రులకు";
+        } else if (lang == "hin") {
+          explain_text = "नए साल के लिए काउंटडाउन";
+          share_btn_text = "व्हाट्सएप पर साझा करें";
+          share_text = "अपने परिवार और दोस्तों को";
+        } else {
+          explain_text = "Timer until New Year";
+          share_btn_text = "Share on WhatsApp";
+          share_text = "Wishes your family and friends";
+        }
+        document.querySelector("#timer-text").textContent = explain_text;
+        document.querySelector("#shareText").textContent = share_btn_text;
+        document.querySelector("#sentText").textContent = share_text;
+      }
+
+      // Share info function to setup share button
+      function share_info(user, created) {
+        let form = document.getElementById("shareForm");
+        let shareBtn = document.getElementById("shareBtn");
+        const url = window.location.href.replace(/[\?&]created=1*/g, "");
+        shareBtn.children[0].setAttribute(
+          "href",
+          `https://wa.me/?text=${encodeURIComponent(
+            `${user} sent you a new year gift 🎁\n\n${url}`
+          )}`
+        );
+
+        if (user && user.trim() !== "") {
+          let userText = document.getElementById("user-text");
+          userText.textContent = user;
+          userText.classList.remove("d-none");
+          if (created == "1") {
+            form.classList.add("d-none");
+            shareBtn.classList.remove("d-none");
+            shareBtn.classList.remove("ps-3");
+            shareBtn.classList.add("w-100");
+            shareBtn.classList.add("animate__tada");
+          }
+        }
+      }
+
+      function setup_post_celebration(is_new_year) {
+        confettiCelebration();
+        let pre_celeb = document.getElementById("pre-celeb");
+        let post_celeb = document.getElementById("post-celeb");
+        if (is_new_year) {
+          pre_celeb.classList.add("d-none");
+          post_celeb.classList.remove("d-none");
+        }
+      }
       const user = new URLSearchParams(window.location.search).get("name");
       const lang = new URLSearchParams(window.location.search).get("lang");
       const created = new URLSearchParams(window.location.search).get(
         "created"
       );
+      share_info(user, created);
+      change_language(lang || "en");
       let is_new_year = false;
       let celebration_triggered = false;
-      const form = document.getElementById("shareForm");
       document.getElementById("langSelect").value = lang || "en";
       const shareBtn = document.getElementById("shareBtn");
       //   shareBtn.classList.add("d-none");
@@ -280,12 +369,12 @@
       // Get current time and create countdown
       function getCountdownTarget() {
         const now = new Date();
-        const target = new Date(now.getFullYear() + 1, 0, 1, 0, 0, 0); // Next New Year
+        const target = new Date(now.getFullYear() + 1, 0, 0, 0, 0, 0); // Next New Year
         return target;
       }
 
       function getCountdownToDate() {
-        const target = new Date("December 17, 2025 23:48:50");
+        const target = new Date("December 27, 2025 17:53:50");
         return target;
       }
 
@@ -318,22 +407,15 @@
         )}:${String(time.minutes).padStart(2, "0")}:${String(
           time.seconds
         ).padStart(2, "0")}`;
-        if (lang === "tel") {
-          document.querySelector(".explain").textContent =
-            "కొత్త సంవత్సరానికి గడువు";
-        } else if (lang === "hin") {
-          document.querySelector(".explain").textContent =
-            "नए साल के लिए काउंटडाउन";
-        } else {
-          document.querySelector(".explain").textContent =
-            "Timer until New Year";
-        }
         if (is_new_year) {
-          countdownDaysElement.classList.add("d-none");
+          setup_post_celebration(is_new_year);
+          countdownDaysElement.textContent = `Happy New Year! ${user || ""}`;
           countdownElement.classList.add("d-none");
           if (!celebration_triggered) {
-            document.getElementById("postTimer").classList.remove("d-none");
+            celebration_triggered = true;
+            // confettiCelebration();
           }
+          return;
         }
       }
       const countdownDaysElement = document.getElementById("cd-timer-days");
@@ -341,115 +423,73 @@
       setInterval(updateCountdownDisplay, 1000);
       updateCountdownDisplay();
 
-      if (user && user.trim() !== "") {
-        document.getElementById("timer-text").classList.add("d-none");
-        document.getElementById("user-text").textContent = user;
-        document.getElementById("user-gift").classList.remove("d-none");
-        document.getElementById("user-text").classList.add("d-block");
-        const url = window.location.href.replace(/[\?&]created=1*/g, "");
-        shareBtn.classList.remove("d-none");
-        shareBtn.children[0].setAttribute(
-          "href",
-          `https://wa.me/?text=${encodeURIComponent(
-            `${user} sent you a gift 🎁\n\n${url}`
-          )}`
-        );
-        if (lang === "tel") {
-          document.getElementById("sentText").textContent =
-            "మీకు ఒక బహుమతి పంపించారు";
-          document.getElementById("shareText").textContent =
-            "వాట్సాప్‌లో షేర్ చేయండి";
-        } else if (lang === "hin") {
-          document.getElementById("sentText").textContent =
-            "आपको एक उपहार भेजा";
-          document.getElementById("shareText").textContent =
-            "व्हाट्सएप पर साझा करें";
-        } else {
-          document.getElementById("sentText").textContent = "sent you a gift";
-          document.getElementById("shareText").textContent =
-            "Share on WhatsApp";
-        }
-        if (!created) {
-          document.getElementById("shareBtn").classList.add("d-none");
-        } else {
-          form.classList.add("d-none");
-          document.getElementById("shareBtn").classList.remove("d-none");
-          document.getElementById("shareBtn").classList.remove("ps-3");
-          document.getElementById("shareBtn").classList.add("w-100");
-          document.getElementById("shareBtn").classList.add("animate__tada");
-        }
-      } else {
-        document.getElementById("timer-text").classList.remove("d-none");
-        document.getElementById("user-gift").classList.add("d-none");
-      }
+      //   const giftBox = document.getElementById("gift-box");
+      //   let tooltip;
+      //   giftBox.addEventListener("click", () => {
+      //     simpleBlast();
+      //     if (is_new_year) {
+      //       giftBox.classList.add("d-none");
+      //       document.getElementById("postTimer").textContent = "";
+      //       if (lang === "tel") {
+      //         postTimer.innerHTML = `<div class="animate__animated animate__tada animate__infinite">2026<div>నూతన సంవత్సర శుభాకాంక్షలు ✨`;
+      //       } else if (lang === "hin") {
+      //         postTimer.innerHTML = `<div class="animate__animated animate__tada animate__infinite">2026<div>नया साल मुबारक हो!`;
+      //       } else {
+      //         postTimer.innerHTML = `<div class="animate__animated animate__tada animate__infinite">2026<div>Happy New Year!`;
+      //       }
+      //       //   countdownDaysElement.textContent = `Happy New Year! ${user || ""}`;
 
-      const giftBox = document.getElementById("gift-box");
-      let tooltip;
-      giftBox.addEventListener("click", () => {
-        simpleBlast();
-        if (is_new_year) {
-          giftBox.classList.add("d-none");
-          document.getElementById("postTimer").textContent = "";
-          if (lang === "tel") {
-            postTimer.innerHTML = `<div class="animate__animated animate__tada animate__infinite">2026<div>నూతన సంవత్సర శుభాకాంక్షలు ✨`;
-          } else if (lang === "hin") {
-            postTimer.innerHTML = `<div class="animate__animated animate__tada animate__infinite">2026<div>नया साल मुबारक हो!`;
-          } else {
-            postTimer.innerHTML = `<div class="animate__animated animate__tada animate__infinite">2026<div>Happy New Year!`;
-          }
-          //   countdownDaysElement.textContent = `Happy New Year! ${user || ""}`;
+      //       //   countdownElement.classList.remove("d-none");
 
-          //   countdownElement.classList.remove("d-none");
+      //       if (!celebration_triggered) {
+      //         celebration_triggered = true;
+      //         confettiCelebration();
+      //       }
+      //       return;
+      //     }
+      //     if (tooltip) {
+      //       tooltip.remove();
+      //       tooltip = null;
+      //     }
+      //     tooltip = document.createElement("div");
+      //     tooltip.classList.add("animate__animated", "animate__bounceIn");
+      //     tooltip.textContent =
+      //       lang === "tel"
+      //         ? "కొత్త సంవత్సరం వరకు వేచి ఉండండి!"
+      //         : lang === "hin"
+      //         ? "नए साल का इंतजार करें!"
+      //         : "Wait for New Year!";
+      //     tooltip.style.position = "absolute";
+      //     tooltip.style.left =
+      //       giftBox.getBoundingClientRect().left + window.scrollX + "px";
+      //     tooltip.style.top =
+      //       giftBox.getBoundingClientRect().top + window.scrollY + 60 + "px";
+      //     tooltip.style.background = "#fff";
+      //     tooltip.style.color = "#333";
+      //     tooltip.style.padding = "8px 16px";
+      //     tooltip.style.borderRadius = "8px";
+      //     tooltip.style.boxShadow = "0 2px 8px rgba(0,0,0,0.15)";
+      //     tooltip.style.zIndex = 9999;
+      //     tooltip.style.fontWeight = "bold";
+      //     tooltip.style.fontFamily = "inherit";
+      //     document.body.appendChild(tooltip);
+      //     setTimeout(() => {
+      //       if (tooltip) {
+      //         tooltip.remove();
+      //         tooltip = null;
+      //       }
+      //     }, 2000);
+      //     giftBox.classList.remove("animate__bounce");
+      //     giftBox.classList.add("animate__headShake");
 
-          if (!celebration_triggered) {
-            celebration_triggered = true;
-            confettiCelebration();
-          }
-          return;
-        }
-        if (tooltip) {
-          tooltip.remove();
-          tooltip = null;
-        }
-        tooltip = document.createElement("div");
-        tooltip.classList.add("animate__animated", "animate__bounceIn");
-        tooltip.textContent =
-          lang === "tel"
-            ? "కొత్త సంవత్సరం వరకు వేచి ఉండండి!"
-            : lang === "hin"
-            ? "नए साल का इंतजार करें!"
-            : "Wait for New Year!";
-        tooltip.style.position = "absolute";
-        tooltip.style.left =
-          giftBox.getBoundingClientRect().left + window.scrollX + "px";
-        tooltip.style.top =
-          giftBox.getBoundingClientRect().top + window.scrollY + 60 + "px";
-        tooltip.style.background = "#fff";
-        tooltip.style.color = "#333";
-        tooltip.style.padding = "8px 16px";
-        tooltip.style.borderRadius = "8px";
-        tooltip.style.boxShadow = "0 2px 8px rgba(0,0,0,0.15)";
-        tooltip.style.zIndex = 9999;
-        tooltip.style.fontWeight = "bold";
-        tooltip.style.fontFamily = "inherit";
-        document.body.appendChild(tooltip);
-        setTimeout(() => {
-          if (tooltip) {
-            tooltip.remove();
-            tooltip = null;
-          }
-        }, 2000);
-        giftBox.classList.remove("animate__bounce");
-        giftBox.classList.add("animate__headShake");
-
-        setTimeout(() => {
-          giftBox.classList.remove("animate__headShake");
-          giftBox.classList.add("animate__bounce");
-        }, 3000);
-      });
+      //     setTimeout(() => {
+      //       giftBox.classList.remove("animate__headShake");
+      //       giftBox.classList.add("animate__bounce");
+      //     }, 3000);
+      //   });
       function confettiCelebration() {
         // Trigger confetti blast
-        const duration = 60 * 1000,
+        const duration = 15 * 1000,
           animationEnd = Date.now() + duration,
           defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
 
@@ -481,64 +521,64 @@
           );
         }, 250);
       }
-      function schoolCelebration() {
-        const end = Date.now() + 15 * 1000;
+      //   function schoolCelebration() {
+      //     const end = Date.now() + 15 * 1000;
 
-        // go Buckeyes!
-        const colors = ["#bb0000", "#ffffff"];
+      //     // go Buckeyes!
+      //     const colors = ["#bb0000", "#ffffff"];
 
-        (function frame() {
-          confetti({
-            particleCount: 2,
-            angle: 60,
-            spread: 55,
-            origin: { x: 0 },
-            colors: colors,
-          });
+      //     (function frame() {
+      //       confetti({
+      //         particleCount: 2,
+      //         angle: 60,
+      //         spread: 55,
+      //         origin: { x: 0 },
+      //         colors: colors,
+      //       });
 
-          confetti({
-            particleCount: 2,
-            angle: 120,
-            spread: 55,
-            origin: { x: 1 },
-            colors: colors,
-          });
+      //       confetti({
+      //         particleCount: 2,
+      //         angle: 120,
+      //         spread: 55,
+      //         origin: { x: 1 },
+      //         colors: colors,
+      //       });
 
-          if (Date.now() < end) {
-            requestAnimationFrame(frame);
-          }
-        })();
-      }
-      function simpleBlast() {
-        const defaults = {
-          spread: 360,
-          ticks: 50,
-          gravity: 0,
-          decay: 0.94,
-          startVelocity: 30,
-          shapes: ["star"],
-          colors: ["FFE400", "FFBD00", "E89400", "FFCA6C", "FDFFB8"],
-        };
+      //       if (Date.now() < end) {
+      //         requestAnimationFrame(frame);
+      //       }
+      //     })();
+      //   }
+      //   function simpleBlast() {
+      //     const defaults = {
+      //       spread: 360,
+      //       ticks: 50,
+      //       gravity: 0,
+      //       decay: 0.94,
+      //       startVelocity: 30,
+      //       shapes: ["star"],
+      //       colors: ["FFE400", "FFBD00", "E89400", "FFCA6C", "FDFFB8"],
+      //     };
 
-        function shoot() {
-          confetti({
-            ...defaults,
-            particleCount: 40,
-            scalar: 1.2,
-            shapes: ["star"],
-          });
+      //     function shoot() {
+      //       confetti({
+      //         ...defaults,
+      //         particleCount: 40,
+      //         scalar: 1.2,
+      //         shapes: ["star"],
+      //       });
 
-          confetti({
-            ...defaults,
-            particleCount: 10,
-            scalar: 0.75,
-            shapes: ["circle"],
-          });
-        }
+      //       confetti({
+      //         ...defaults,
+      //         particleCount: 10,
+      //         scalar: 0.75,
+      //         shapes: ["circle"],
+      //       });
+      //     }
 
-        setTimeout(shoot, 0);
-        setTimeout(shoot, 100);
-      }
+      //     setTimeout(shoot, 0);
+      //     setTimeout(shoot, 100);
+      //   }
     </script>
   </body>
 </html>

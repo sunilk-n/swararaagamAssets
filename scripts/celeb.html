@@ -415,13 +415,12 @@
           time.seconds
         ).padStart(2, "0")}`;
         if (is_new_year) {
-          setup_post_celebration(is_new_year);
-          countdownDaysElement.textContent = `Happy New Year! ${user || ""}`;
-          countdownElement.classList.add("d-none");
           if (!celebration_triggered) {
             celebration_triggered = true;
-            // confettiCelebration();
+            setup_post_celebration(is_new_year);
           }
+          countdownDaysElement.textContent = `Happy New Year! ${user || ""}`;
+          countdownElement.classList.add("d-none");
           return;
         }
       }

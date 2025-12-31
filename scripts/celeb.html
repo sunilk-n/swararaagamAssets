@@ -387,7 +387,7 @@
 
       function updateCountdown() {
         const now = new Date();
-        const target = getCountdownTarget();
+        const target = getCountdownToDate();
         const diff = target - now;
 
         if (diff <= 0) {

@@ -1,14 +1,8 @@
 {
-  "Republic Day": {
-    "start_date": "2026-01-25",
-    "end_date": "2026-01-26",
-    "modal_image_url": "https://raw.githubusercontent.com/sunilk-n/swararaagamAssets/refs/heads/main/assets/republic-day.png",
-    "banner_image_url": "https://raw.githubusercontent.com/sunilk-n/swararaagamAssets/refs/heads/main/assets/republic-day-banner.jpg"
-  },
-  "Valentine's Day": {
-    "start_date": "2026-02-10",
-    "end_date": "2026-02-15",
-    "modal_image_url": "https://raw.githubusercontent.com/sunilk-n/swararaagamAssets/refs/heads/main/assets/valentines-day.png",
-    "banner_image_url": "https://raw.githubusercontent.com/sunilk-n/swararaagamAssets/refs/heads/main/assets/valentines-day-banner.jpg"
+  "Ugadi Festival": {
+    "start_date": "2026-03-11",
+    "end_date": "2026-03-12",
+    "modal_image_url": "https://raw.githubusercontent.com/sunilk-n/swararaagamAssets/refs/heads/main/assets/ugadi.png",
+    "banner_image_url": "https://raw.githubusercontent.com/sunilk-n/swararaagamAssets/refs/heads/main/assets/ugadi-banner.png"
   }
 }

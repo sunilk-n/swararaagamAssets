@@ -1,4 +1,4 @@
-*Effective Date: 22-12-2025*
+*Effective Date: 24-07-2026*
 
 Please read this Refund Policy carefully before purchasing any karaoke tracks or event services.
 
@@ -10,14 +10,6 @@ Please read this Refund Policy carefully before purchasing any karaoke tracks or
 - Refunds will not be provided once a track has been accessed or downloaded
 - Please review track details carefully before making a purchase
 
-## Live Karaoke Events
-
-Refund eligibility for live karaoke events depends on the event type and timing of cancellation:
-
-- Event tickets are generally **non-refundable**
-- If an event is cancelled by **Swararaagam**, a full or partial refund may be issued.
-- If an event is rescheduled, tickets may remain valid for the new date.
-
 ## Duplicate or Failed Payments
 
 If you are charged more than once for the same purchase or experience a failed transaction where money is deducted:
@@ -25,12 +17,13 @@ If you are charged more than once for the same purchase or experience a failed t
 - Please contact us with payment proof
 - Eligible duplicate charges will be refunded after verification
 - Refunds will be processed to the original payment method
+- Mail to <support@swararaagam.com> with transaction details, user email and contact number
 
 ## Technical Issues
 
 If you face technical issues such as inability to access purchased karaoke tracks:
 
-- Contact our support team immediately
+- Contact our support team immediately @ <support@swararaagam.com>
 - We will attempt to resolve the issue by re-providing access
 - Refunds will be considered only if the issue cannot be resolved
 
@@ -46,6 +39,14 @@ Approved refunds will be Credited within 2-5 business days. Processing time may 
 
 If you have any questions or concerns about this Privacy Policy, please contact us through our website:
 
-Website: https://swararaagam.com
+Website: <https://swararaagam.com>
+
+Email: <support@swararaagam.com>
+
+Contact:
+
+- Nerella Ramesh (+91-9032390400)
+- Nerella Avinash (+91-8143100951)
+- Sunil Kumar Nerella (+91-9032390400) (Developer)
 
 © 2025 Swararaagam. All Rights Reserved.

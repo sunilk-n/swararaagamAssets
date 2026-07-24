@@ -32,7 +32,7 @@
 
 9. **How can I contact Swararaagam for support?**
 
-    Absolutely. Swararaagam is designed for beginners, intermediate singers, and professional performers alike.
+    Currently the only way to contact our team is by mail us at <support@swararaagam.com>. We are constantly working on providing better reachability to the users.
 
 10. **Can beginners use Swararaagam?**
 
@@ -41,7 +41,7 @@ You can contact us through our website at www.swararaagam.com for support, event
 
 **Note:** For updates on new karaoke tracks and upcoming live events, please visit our website regularly.
 
-Visit our website: https://swararaagam.com
+Visit our website: <https://swararaagam.com>
 
 Join Swararaagam and be part of a growing community that celebrates the beauty of Telugu music through karaoke and live performances.
 

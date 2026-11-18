@@ -28,11 +28,11 @@
      Users can purchase individual karaoke songs through our platform.  
      Once purchased, users will have access to the song for personal use up to 5 downloads.
 
-  2. **Subscription Plans (Yet to Implement):**
+  2. **Subscription Plans:**
 
      We offer various subscription plans that provide users with access to a collection  
      of karaoke songs for a specified duration.  
-     Users can choose a plan that suits their needs and budget (Yet to Implement).
+     Users can choose a plan that suits their needs and budget.
 
 - All subscription fees are non-refundable unless otherwise specified or required by law.
 - We may change our fees at any time by posting the changes on our website or notifying you directly.
@@ -75,6 +75,7 @@ You agree to indemnify, defend, and hold harmless **SwaraRaagam**, its directors
 
 ## Termination
 - We may terminate or suspend your account and access to our Services immediately, without prior notice or liability, for any reason, including, without limitation, if you breach these Terms.
+- Any unauthorized modification, tampering, reverse engineering, manipulation, or attempt to bypass the security mechanisms of the Swara Raagam desktop application is strictly prohibited. Swara Raagam reserves the right to immediately suspend or terminate the user's subscription without prior notice if any such activity is detected.
 - Upon termination, your right to use our Services will immediately cease. All provisions of these Terms which by their nature should survive termination shall survive, including, without limitation, ownership provisions, warranty disclaimers, indemnity, and limitations of liability.
 
 ## Changes to Terms
